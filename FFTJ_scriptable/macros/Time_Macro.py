@@ -53,24 +53,26 @@ timeprofile_pix=timeprocessor.getPixels();
 
 IJ.log("running")
 
-for x in range(0,10):
-	for y in range(0,10):
-		progress=(x*5+y)/25.0
-		IJ.showProgress(progress)
-		#IJ.log( "x is "+str(x)+ " y is "+str(y))
-		
+for x in range(0,width):
+	for y in range(0,height):
+		IJ.log( "x is "+str(x)+ " y is "+str(y))
+
+		# loop through time collecting pixels at x,y and form profile
 		for t in range(1,frames+1):
 			pix=stack.getProcessor(t).getPixels()
 			timeprofile_pix[t-1]=pix[x+y*width]
 
+		# call FFTJ on profile
 		IJ.run("FFTJ Script", "real=TimeProfile imaginary=<none> complex344=[Single Precision] fft=forward fourier=[At (0,0,0)] show_power_spectrum")
 		spectrum_plus=IJ.getImage()
 		spectrum_pix=spectrum_plus.getProcessor().getPixels()
 
+		# copy profile to output time series
 		for t in range(1, frames+1):
 			pix=out_stack.getProcessor(t).getPixels()
 			pix[x+y*width]=spectrum_pix[t-1]
 
+		# close power spectrum
 		spectrum_plus.changes=False
 		spectrum_plus.close()
 
