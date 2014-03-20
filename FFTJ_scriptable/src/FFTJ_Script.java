@@ -72,7 +72,7 @@ public class FFTJ_Script implements PlugIn
         GenericDialog gd = new GenericDialog( plugInTitle, IJ.getInstance() );
         gd.addChoice( "Real part of input:", titles1, titles1[ 0 ] );
         gd.addChoice( "Imaginary part of input:", titles2, titles2[ 0 ] );
-        gd.addChoice( "Complex344 Number Precision:",
+        gd.addChoice( "Complex Number Precision:",
                       new String[] { cnPrecisions[ 0 ].toString(), cnPrecisions[ 1 ].toString() },
                       cnPrecisions[ 0 ].toString() );
         gd.addChoice( "FFT Direction:", new String[] { "forward", "inverse" }, "forward" );
