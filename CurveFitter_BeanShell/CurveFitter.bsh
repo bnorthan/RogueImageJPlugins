@@ -1,0 +1,29 @@
+// Simple Example showing how to call the ImageJ CurveFitter from
+// a beanshell script and produce a plot of the fitted line. 
+//
+// Inspired by this discussion:
+// http://imagej.1557.x6.nabble.com/Running-a-Gaussian-Fit-in-a-Beanshell-Script-td5007134.html
+
+// make some test data
+double[] x = new double [] {0, 1, 2, 3, 4, 5};
+double[] y = new double [] {0, 0.9, 4.5, 8, 18, 24};
+
+// create a fitter
+CurveFitter fitter=new CurveFitter(x, y);
+
+// call the doFit function pass constant representing type of fit
+// see (http://imagej.nih.gov/ij/developer/api/ij/measure/CurveFitter.html) 
+// for more options
+fitter.doFit(CurveFitter.POLY3);
+
+// get results
+double[] results=fitter.getParams();
+
+// loop printing result 
+for (double d:results)
+{
+	print(d);
+}
+
+// use the static plot function from the fitter class to produce an output plot.
+ij.plugin.frame.Fitter.plot(fitter);
