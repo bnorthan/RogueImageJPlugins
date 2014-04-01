@@ -3,10 +3,28 @@
 //
 // Inspired by this discussion:
 // http://imagej.1557.x6.nabble.com/Running-a-Gaussian-Fit-in-a-Beanshell-Script-td5007134.html
+// and this one:
+// http://imagej.1557.x6.nabble.com/Line-ROIs-and-Fit-a-few-quot-how-to-quot-questions-in-ImageJ-Javascript-td5007161.html
 
-// make some test data
-double[] x = new double [] {0, 1, 2, 3, 4, 5};
-double[] y = new double [] {0, 0.9, 4.5, 8, 18, 24};
+// get the ROI manager... assuming it exists and has atleast 1 roi 
+RoiManager manager=RoiManager.getInstance();
+Roi roi=manager.getRoisAsArray()[0];
+
+// get the active image
+ip = WindowManager.getCurrentImage();
+
+// give active image to roi
+roi.setImage(ip);
+
+// now we can get the pixels
+double[] y=roi.getPixels();
+double[] x=new double[y.length];
+
+// just make x 0,1,2,3... etc.
+for (int i=0;i<y.length;i++)
+{
+	x[i]=i;
+}
 
 // create a fitter
 CurveFitter fitter=new CurveFitter(x, y);
@@ -22,7 +40,6 @@ double[] xPoints=fitter.getXPoints();
 double[] yPoints=fitter.getYPoints();
 
 print("Params:");
-
 // loop printing params 
 for (double d:params)
 {
@@ -30,6 +47,7 @@ for (double d:params)
 }
 
 print("\nPoints:");
+// loop printing the points of the fitted line
 for (int i=0;i<xPoints.length;i++)
 {
 	print("x: "+xPoints[i]+" y: "+yPoints[i]);
