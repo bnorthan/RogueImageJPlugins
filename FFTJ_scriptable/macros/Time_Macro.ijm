@@ -87,7 +87,6 @@ for (x=0;x<20;x++)
 		//saveAs("Tiff", outputDirectory+spectrumName);
 		spectrumID=getImageId();
 
-		dfsafsaf
 		// copy spectrum to output
 		for (t=1;t<=frames;t++)
 		{
