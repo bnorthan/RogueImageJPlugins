@@ -30,6 +30,11 @@ public class RichardsonLucyITK<T extends RealType<T>, S extends RealType<S>>
 	
 	public void run()
 	{
+		// in this "simple" example we are assuming the images are 3D volumes
+		// A more realistic assumption is that the input is a ND dataset
+		// Code for itk decon integration into a more complete framework can be found here (for now)
+		// https://github.com/bnorthan/projects/tree/master/truenorthJ/ImageJ2Plugins/itk-imagej-tn
+		
 		// convert input to itk Images
 		Image itkImage=SimpleItkImagejUtilities.simple3DITKImageFromInterval(input);
 		Image itkPsf=SimpleItkImagejUtilities.simple3DITKImageFromInterval(kernel);

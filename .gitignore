@@ -33,6 +33,7 @@ target/
 *~
 
 #cmake
+bin/
 CMakeCache.txt
 CMakeFiles
 Makefile
