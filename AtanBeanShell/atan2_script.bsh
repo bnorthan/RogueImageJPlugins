@@ -1,0 +1,29 @@
+
+
+ip1=WindowManager.getImage("clown.jpg (red)").getProcessor();
+ip2=WindowManager.getImage("clown.jpg (green)").getProcessor();
+
+width = ip1.getWidth();
+height = ip1.getHeight();
+
+out = NewImage.createFloatImage("out", width, height, 1, 0);
+out_ip=out.getProcessor();
+
+ip1Buffer=ip1.getPixels();
+ip2Buffer=ip2.getPixels();
+outBuffer=out_ip.getPixels();
+
+for (x=0;x<width;x++)
+{
+	for (y =0;y<height;y++)
+	{
+		p1=ip1Buffer[x+y*width];
+		p2=ip2Buffer[x+y*width];
+		
+		value=java.lang.Math.atan2((double)p1, (double)p2);
+		
+		outBuffer[x+y*width]=(float)value;
+	}
+}
+
+out.show();
