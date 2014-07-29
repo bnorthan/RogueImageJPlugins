@@ -1,0 +1,10 @@
+// duplicate image
+IJ.run("Duplicate...", "title=rgbimage");
+// split channels
+IJ.run("Split Channels");
+// Combine channels into a stack
+IJ.run("Concatenate...", "  title=[Concatenated Stacks] image1=[rgbimage (red)] image2=[rgbimage (green)] image3=[rgbimage (blue)] image4=[-- None --]");
+// run PCA
+IJ.run("PCA ");
+
+table=resultsTable();

@@ -9,21 +9,76 @@ height = ip1.getHeight();
 out = NewImage.createFloatImage("out", width, height, 1, 0);
 out_ip=out.getProcessor();
 
+out_add = NewImage.createShortImage("out_add", width, height, 1, 0);
+out_ip_add=out.getProcessor();
+
 ip1Buffer=ip1.getPixels();
 ip2Buffer=ip2.getPixels();
 outBuffer=out_ip.getPixels();
+addBuffer=out_ip_add.getPixels();
+
+start=System.currentTimeMillis();
 
 for (x=0;x<width;x++)
 {
 	for (y =0;y<height;y++)
 	{
-		p1=ip1Buffer[x+y*width];
-		p2=ip2Buffer[x+y*width];
+		index=x+y*width;
+		p1=ip1Buffer[index];
+		p2=ip2Buffer[index];
 		
 		value=java.lang.Math.atan2((double)p1, (double)p2);
 		
-		outBuffer[x+y*width]=(float)value;
+		outBuffer[index]=(float)value;
 	}
 }
+
+time=System.currentTimeMillis()-start;
+
+start=System.currentTimeMillis();
+
+print(time);
+
+for (i=0;i<width*height;i++)
+{
+		p1=ip1Buffer[i];
+		p2=ip2Buffer[i];
+		
+		value=java.lang.Math.atan2((double)p1, (double)p2);
+		
+		outBuffer[i]=(float)value;
+}
+
+time=System.currentTimeMillis()-start;
+
+print(time);
+
+start=System.currentTimeMillis();
+
+for (x=0;x<width;x++)
+{
+	for (y =0;y<height;y++)
+	{
+		index=x+y*width;
+		addBuffer[index]=ip1Buffer[index]+ip2Buffer[index];
+	}
+}
+
+time=System.currentTimeMillis()-start;
+
+start=System.currentTimeMillis();
+
+print(time);
+
+for (i=0;i<width*height;i++)
+{
+	addBuffer[i]=ip1Buffer[i]+ip2Buffer[i];
+}
+
+time=System.currentTimeMillis()-start;
+
+print(time);
+
+
 
 out.show();
