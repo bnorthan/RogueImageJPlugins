@@ -20,6 +20,6 @@ else:
  
 # The measured areas are listed in the first column of the results table, as a float array:
 areas = table.getColumn(0)
-*/
+
 
 table=new ResultsTable();

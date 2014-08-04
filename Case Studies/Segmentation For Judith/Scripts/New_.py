@@ -1,16 +1,3 @@
-
-
-inputImage='B013-D0-L-UV_cropped2.tif'
-IJ.selectWindow(inputImage)
-
-title="pore_image";
-
-IJ.run("Duplicate...", "title="+title)
-
-IJ.run("HSB Stack");
-IJ.selectWindow("pore_image")
-
-
 IJ.run("Convert Stack to Images");
 
 mins=[172, 0, 90]
@@ -20,7 +7,7 @@ names=["Hue", "Saturation", "Brightness"]
 for i in range(0,3):
   	IJ.selectWindow(names[i])
   	IJ.setThreshold(mins[i], maxs[i])
-  	print names[i]
+  	print "test"
   	IJ.run("Convert to Mask")
 
 calc = ImageCalculator()
