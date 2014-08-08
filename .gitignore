@@ -21,7 +21,6 @@ log/
 target/
 
 # images
-*.tif
 *.wu
 *.raw
 
