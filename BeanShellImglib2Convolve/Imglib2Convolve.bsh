@@ -1,0 +1,31 @@
+import net.imglib2.FinalDimensions;
+import net.imglib2.img.array.ArrayImgs;
+import net.imglib2.algorithm.fft2.FFTConvolution;
+
+size=20;
+
+input = new float[size];
+kernel = new float[size];
+output = new float[size];
+
+// place a couple of impulses in the array
+input[size / 4] = 50;
+input[size / 2] = 100;
+
+// make the kernel a pulse
+kernel[size/2-1]=0.33f;
+kernel[size/2]=0.33f;
+kernel[size/2+1]=0.33f;
+
+// wrap arrays as imglib2 Imgs
+dimensions = new long[] { size };
+arrayInput=ArrayImgs.floats(input, dimensions);
+arrayKernel= ArrayImgs.floats(kernel, dimensions);
+arrayOutput = ArrayImgs.floats(output, dimensions);
+
+// call the convolution
+new FFTConvolution( arrayInput, arrayKernel, arrayOutput  ).run();
+
+// print input and output 
+for (int i=0;i<size;i++)
+	print(input[i]+" :        "+output[i]);
